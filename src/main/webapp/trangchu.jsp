@@ -149,29 +149,28 @@
 					<c:if test="${loopStatus.index % 3 == 0}">
 						<tr>
 					</c:if>
+					<tr>
+						<td>
+							<div class="box_tour">
+								<div class="tour-highlight">
 
-					<td>
-						<div class="box_tour">
-							<div class="tour-highlight">
-
-								<img class="anh_tour" width="365" height="296"
-									src="img/${tour.imagePaths[0]}"> <a class="ngaydi"
-									href="showTour.jsp?tourId=${tour.id}">${tour.name}</a><br>
-								<i class="fa fa-plane icon_tour" aria-hidden="true"></i> <span>${tour.duration }</span><br>
-								<i class="fa fa-calendar icon_tour" aria-hidden="true"></i> <span>${tour.schedule }</span><br>
-								<p class="price">
-									<fmt:setLocale value="vi_VN" />
-									<fmt:formatNumber value="${tour.price}" />
-									VND
-								</p>
-								<a class="chi_tiet_tour" href="showTour.jsp?tourId=${tour.id}">XEM
-									CHI TIẾT</a>
+									<img class="anh_tour" width="365" height="296"
+										src="img/${tour.imagePaths[0]}"> <a class="ngaydi"
+										href="showTour.jsp?tourId=${tour.id}">${tour.name}</a><br>
+									<i class="fa fa-plane icon_tour" aria-hidden="true"></i> <span>${tour.duration }</span><br>
+									<i class="fa fa-calendar icon_tour" aria-hidden="true"></i> <span>${tour.schedule }</span><br>
+									<p class="price">
+										<fmt:setLocale value="vi_VN" />
+										<fmt:formatNumber value="${tour.price}" />
+										VND
+									</p>
+									<a class="chi_tiet_tour" href="showTour.jsp?tourId=${tour.id}">XEM
+										CHI TIẾT</a>
+								</div>
 							</div>
-						</div>
-					</td>
-
+						</td>
+					</tr>
 					<c:if test="${(loopStatus.index + 1) % 3 == 0 or loopStatus.last}">
-						</tr>
 					</c:if>
 				</c:if>
 			</c:forEach>
@@ -184,9 +183,9 @@
 			<li class="tay_bac"><img src="img/kinhNghiemTB.jpg"><br>
 				<a href="tay_bac.jsp" class="text">Kinh nghiệm phượt Tây Bắc mùa
 					đông</a><br> <span class="ngay">02/11/2019</span><br>
-				<p>Share bài đi!!Việt Pha vừa kết thúc chuyến du lịch Mộc Châu
-					trong 5 ngày và đang rất háo hức chia sẽ lại những kỉ niệm đẹp
-					trong chuyến đi đó...</p></li>
+				<p>Share bài đi!!Tôi vừa kết thúc chuyến du lịch Mộc Châu trong
+					5 ngày và đang rất háo hức chia sẽ lại những kỉ niệm đẹp trong
+					chuyến đi đó...</p></li>
 			<li>
 				<ul class="DL-SP-NT">
 					<li class="da_lat">
@@ -195,7 +194,7 @@
 								src="img/kinhNghiemDL.jpg"></li>
 							<li><a href="da_lat.jsp" class="textn">Kinh nghiệm đà
 									lạt mùa đông</a><br> <span class="ngayn">02/11/2019</span><br>
-								<p>Share bài đi!!Việt Pha vừa kết thúc chuyến du lịch Đà Lạt
+								<p>Share bài đi!!Tôi vừa kết thúc chuyến du lịch Đà Lạt
 									trong 5 ngày...</p></li>
 						</ul>
 					</li>
@@ -205,8 +204,8 @@
 								src="img/kinhNghiemSP.jpg"></li>
 							<li><a href="sapa.jsp" class="textn">Kinh nghiệm du lịch
 									tự túc SaPa</a><br> <span class="ngayn">02/11/2019</span><br>
-								<p>Share bài đi!!Việt Pha vừa kết thúc chuyến du lịch SaPa
-									trong 5 ngày...</p></li>
+								<p>Share bài đi!!Tôi vừa kết thúc chuyến du lịch SaPa trong
+									5 ngày...</p></li>
 						</ul>
 					</li>
 					<li class="vinh_hy">
@@ -215,56 +214,54 @@
 								src="img/kinhNghiemVH.jpg"></li>
 							<li><a href="vinh_hy.jsp" class="textn">Kinh nghiệm Vĩnh
 									Huy mùa xuân</a><br> <span class="ngayn">02/11/2019</span><br>
-								<p>Share bài đi!!Việt Pha vừa kết thúc chuyến đi Vĩnh Huy
-									trong 4 ngày...</p></li>
+								<p>Share bài đi!!Tôi vừa kết thúc chuyến đi Vĩnh Huy trong 4
+									ngày...</p></li>
 						</ul>
 
 					</li>
 				</ul>
 			</li>
 		</ul>
-		<div class="footer">
-			<ul class="list_footer">
-				<li class="list1">
-					<p class="p1">THÔNG TIN LIÊN HỆ</p>
-					<p class="p2">Công ty du lịch VietPha</p> <span class="sp1">
-						<i class="fa-solid fa-location-dot"></i> 74 D2 Tăng Nhơn phú A,<br>Thành
-						Phố Thủ Đức,HCM
-				</span><br>
-					<p class="p3">0399 790 053</p> <a class="a1"
-					href="https://mail.google.com/mail/u/1/#inbox?compose=new"> <i
-						class="fa fa-envelope email_icon" aria-hidden="true"></i>
-						vanluan0903@gmail.com
-				</a>
-				</li>
-				<li class="list2">
-					<p class="p4">HỖ TRỢ TƯ VẤN</p>
-					<p class="p5">HOTLINE 0399 709 053</p> <a
-					href="https://www.facebook.com/pha.nguyen.792" class="fb_icon">
-						<i class="fa-brands fa-facebook" style="color: #1262ed;"></i>
-				</a> <a href="https://www.facebook.com/pha.nguyen.792" class="ins_icon">
-						<i class="fa-brands fa-instagram" style="color: #ec2222;"></i>
-				</a> <a href="https://mail.google.com/mail/u/1/#inbox?compose=new"
-					class="mail_icon"> <i class="fa-regular fa-envelope"
-						style="color: #db611f;"></i>
-				</a> <a href="https://www.facebook.com/pha.nguyen.792"
-					class="tiktok_icon"> <i class="fa-brands fa-tiktok"
-						style="color: #e3e7ed;"></i>
-				</a>
-				</li>
-				<li class="list3">
-					<p class="p6">THÔNG TIN CẦN BIẾT</p> <a class="a2"
-					href="trangchu.jsp">Điều kiện điều khoản</a><br> <a class="a3"
-					href="trangchu.jsp">Phương thức thanh toán</a><br> <a
-					class="a4" href="trangchu.jsp">Bảo mật thông tin khách hàng</a><br>
-					<a class="a5" href="trangchu.jsp">Chính sách quy định</a><br>
+	</div>
+	<div class="footer">
+		<ul class="list_footer">
+			<li class="list1">
+				<p class="p1">THÔNG TIN LIÊN HỆ</p>
+				<p class="p2">Công ty du lịch LongPhuc</p> <span class="sp1">
+					<i class="fa-solid fa-location-dot"></i> 1234, QL1K<br>Thành
+					Phố Thủ Đức,HCM
+			</span><br>
+				<p class="p3">0123 456 789</p> <a class="a1"
+				href="https://mail.google.com"> <i
+					class="fa fa-envelope email_icon" aria-hidden="true"></i>
+					longphuc@gmail.com
+			</a>
+			</li>
+			<li class="list2">
+				<p class="p4">HỖ TRỢ TƯ VẤN</p>
+				<p class="p5">HOTLINE 0123 456 789</p> <a
+				href="https://www.facebook.com" class="fb_icon"> <i
+					class="fa-brands fa-facebook" style="color: #1262ed;"></i>
+			</a> <a href="https://www.facebook.com" class="ins_icon"> <i
+					class="fa-brands fa-instagram" style="color: #ec2222;"></i>
+			</a> <a href="https://mail.google.com" class="mail_icon"> <i
+					class="fa-regular fa-envelope" style="color: #db611f;"></i>
+			</a> <a href="https://www.tiktok.com" class="tiktok_icon"> <i
+					class="fa-brands fa-tiktok" style="color: #e3e7ed;"></i>
+			</a>
+			</li>
+			<li class="list3">
+				<p class="p6">THÔNG TIN CẦN BIẾT</p> <a class="a2"
+				href="trangchu.jsp">Điều kiện điều khoản</a><br> <a class="a3"
+				href="trangchu.jsp">Phương thức thanh toán</a><br> <a
+				class="a4" href="trangchu.jsp">Bảo mật thông tin khách hàng</a><br>
+				<a class="a5" href="trangchu.jsp">Chính sách quy định</a><br>
 
-				</li>
-			</ul>
-			<div class="text_footer">
-				<span class="sp2">Bản quyền thuộc về Du Lịch | Thiết kế bởi </span><span
-					class="sp3">VPVL</span>
-			</div>
+			</li>
+		</ul>
+		<div class="text_footer">
+			<span class="sp2">Bản quyền thuộc về Du Lịch | Thiết kế bởi </span>
 		</div>
+	</div>
 </body>
 </html>
