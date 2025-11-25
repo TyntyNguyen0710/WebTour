@@ -56,6 +56,12 @@
 		</nav>
 	</div>
 	</div>
+	<%
+	tourDAO td = tourDAO.getIntance();
+	ArrayList<Tour> tours = td.selectAll();
+	HttpSession Mysession = request.getSession();
+	Mysession.setAttribute("tours", tours);
+	%>
 	<div class="gioi_thieu">
 		<ul class="phan_than">
 			<li class="trai">
