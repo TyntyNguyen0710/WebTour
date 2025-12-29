@@ -11,5 +11,6 @@ public class Test {
 //		for (Booking booking : bookings) {
 //			System.out.println(booking);
 //		}
+		System.out.println(customerDAO.getIntance().selectByEmail("philong2m@gmail.com"));
 	}
 }
