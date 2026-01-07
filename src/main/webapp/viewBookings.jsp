@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@page import="DataBase.JDBCUltil"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page import="model.Booking"%>
+<%@ page import="dao.bookingDAO"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -16,7 +20,7 @@ if (!"Admin".equals(userRole)) {
 <meta charset="UTF-8">
 <title>Danh sách đặt Tours</title>
 <link rel="stylesheet" href="css/reset.css">
-<link rel="stylesheet" href="css/viewBooking.css">
+<link rel="stylesheet" href="css/viewBookings.css">
 </head>
 <body>
 	<c:set var="bookings" value="<%=bookingDAO.getIntance().selectAll()%>"
