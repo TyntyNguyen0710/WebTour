@@ -35,23 +35,23 @@
 			<p>Thông tin đặt tour:</p>
 			<!-- Displaying the hidden input values -->
 			<p>
-				<strong>Họ và tên:</strong>${param.fullName}</p>
+				<strong>Họ và tên: </strong>${param.fullName}</p>
 			<p>
-				<strong>Địa chỉ:</strong> ${param.address}
+				<strong>Địa chỉ: </strong> ${param.address}
 			</p>
 			<p>
-				<strong>E-mail:</strong> ${param.email}
+				<strong>E-mail: </strong> ${param.email}
 			</p>
 			<p>
-				<strong>Điện thoại:</strong> ${param.phone}
+				<strong>Điện thoại: </strong> ${param.phone}
 			</p>
 			<p>
-				<strong>Ngày khởi hành:</strong>${param.departureDate}</p>
+				<strong>Ngày khởi hành: </strong>${param.departureDate}</p>
 			<p>
-				<strong>Số người lớn:</strong> ${param.adults}
+				<strong>Số người lớn: </strong> ${param.adults}
 			</p>
 			<p>
-				<strong>Số trẻ em:</strong>${param.childs}</p>
+				<strong>Số trẻ em: </strong>${param.childs}</p>
 
 			<input type="submit" value="Xác nhận"> <input type="button"
 				value="Hủy" onclick="location.href='bookingTour.jsp';">
