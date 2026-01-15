@@ -328,7 +328,7 @@ public class customerDAO implements DAOInterface<Customer> {
 			// Execute the insert
 			result = preparedStatement.executeUpdate();
 
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace(); // Handle the exception based on your application's needs
 		} finally {
 			JDBCUltil.closePreparedStatement(preparedStatement);
@@ -337,7 +337,8 @@ public class customerDAO implements DAOInterface<Customer> {
 
 		return result;
 	}
-	public int update(String name, String phone, String address,String username) {
+
+	public int update(String name, String phone, String address, String username) {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -348,7 +349,7 @@ public class customerDAO implements DAOInterface<Customer> {
 			preparedStatement.setString(2, phone);
 			preparedStatement.setString(3, address);
 			preparedStatement.setString(4, username);
-			
+
 			// Execute the update
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {

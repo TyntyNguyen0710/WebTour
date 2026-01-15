@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface DAOInterface<T> {
@@ -9,7 +10,7 @@ public interface DAOInterface<T> {
 
 	public int delete(T t);
 
-	public ArrayList<T> selectAll();
+	public ArrayList<T> selectAll() throws SQLException;
 
 	public T selectByID(String id);
 
