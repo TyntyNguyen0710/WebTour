@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="reset.css">
-<link rel="stylesheet" href="kinhNgiem_Tour.css">
+<link rel="stylesheet" href="css/kinhNgiem_Tour.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
@@ -48,7 +48,6 @@
 
 			</ul>
 		</nav>
-	</div>
 	</div>
 	<div class="gioi_thieu">
 		<ul class="phan_than">
@@ -192,11 +191,11 @@
 			<li class="list1">
 				<p class="p1">THÔNG TIN LIÊN HỆ</p>
 				<p class="p2">Công ty du lịch LongPhuc</p> <span class="sp1">
-					<i class="fa-solid fa-location-dot"></i> 1234 QL1K, <br>Thành
-					Phố Thủ Đức,HCM.
+					<i class="fa-solid fa-location-dot"></i> 1234, QL1K,<br>Thành
+					Phố Thủ Đức,HCM
 			</span><br>
-				<p class="p3">0399 790 053</p> <a class="a1"
-				href="https://mail.google.com/mail"> <i
+				<p class="p3">0123 456 789</p> <a class="a1"
+				href="https://mail.google.com/mail/u/1/#inbox?compose=new"> <i
 					class="fa fa-envelope email_icon" aria-hidden="true"></i>
 					longphuc@gmail.com
 			</a>
@@ -211,7 +210,7 @@
 			</a> <a href="https://mail.google.com/mail"
 				class="mail_icon"> <i class="fa-regular fa-envelope"
 					style="color: #db611f;"></i>
-			</a> <a href="https://www.tiktok.com2"
+			</a> <a href="https://www.tiktok.com"
 				class="tiktok_icon"> <i class="fa-brands fa-tiktok"
 					style="color: #e3e7ed;"></i>
 			</a>

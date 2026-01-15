@@ -14,7 +14,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return new tourDAO();
 	}
 
-	public int insert(Tour t) {
+	public int insert(Tour t) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Connection con = JDBCUltil.getConnection();
@@ -39,7 +39,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return result;
 	}
 
-	public int update(Tour t) {
+	public int update(Tour t) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Connection con = JDBCUltil.getConnection();
@@ -65,7 +65,7 @@ public class tourDAO implements DAOInterface<Tour> {
 
 	}
 
-	public int delete(Tour t) {
+	public int delete(Tour t) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Connection con = JDBCUltil.getConnection();
@@ -84,7 +84,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return result;
 	}
 
-	public Tour selectByID(String tourId) {
+	public Tour selectByID(String tourId) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		Tour result = null;
 		Connection con = JDBCUltil.getConnection();
@@ -115,44 +115,49 @@ public class tourDAO implements DAOInterface<Tour> {
 
 	}
 
-	public ArrayList<Tour> selectAll() {
+	public ArrayList<Tour> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Tour> result = new ArrayList<Tour>();
 		Connection con = JDBCUltil.getConnection();
+
 		String sql = "SELECT t.tourId, t.tenTour, t.duration, t.schedule, t.departure, t.price, t.transport, i.img1, i.img2, i.img3, i.img4, i.img5, i.img6 "
 				+ "FROM Tour t LEFT JOIN imgTour i ON t.tourId = i.tourId";
+		if (con != null) {
+			PreparedStatement ps = con.prepareStatement(sql);
+			try {
+				PreparedStatement pst = con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+				while (rs.next()) {
+					int id = rs.getInt("tourId");
+					String name = rs.getString("tenTour");
+					String duration = rs.getString("duration");
+					String schedule = rs.getString("schedule");
+					String departure = rs.getString("departure");
+					float price = rs.getFloat("price");
+					String transport = rs.getString("transport");
 
-		try {
-			PreparedStatement pst = con.prepareStatement(sql);
-			ResultSet rs = pst.executeQuery();
-			while (rs.next()) {
-				int id = rs.getInt("tourId");
-				String name = rs.getString("tenTour");
-				String duration = rs.getString("duration");
-				String schedule = rs.getString("schedule");
-				String departure = rs.getString("departure");
-				float price = rs.getFloat("price");
-				String transport = rs.getString("transport");
+					ArrayList<String> imagePaths = new ArrayList<String>();
+					imagePaths.add(rs.getString("img1"));
+					imagePaths.add(rs.getString("img2"));
+					imagePaths.add(rs.getString("img3"));
+					imagePaths.add(rs.getString("img4"));
+					imagePaths.add(rs.getString("img5"));
+					imagePaths.add(rs.getString("img6"));
 
-				ArrayList<String> imagePaths = new ArrayList<String>();
-				imagePaths.add(rs.getString("img1"));
-				imagePaths.add(rs.getString("img2"));
-				imagePaths.add(rs.getString("img3"));
-				imagePaths.add(rs.getString("img4"));
-				imagePaths.add(rs.getString("img5"));
-				imagePaths.add(rs.getString("img6"));
+					Tour tour = new Tour(id, name, duration, schedule, departure, price, transport, imagePaths);
+					result.add(tour);
 
-				Tour tour = new Tour(id, name, duration, schedule, departure, price, transport, imagePaths);
-				result.add(tour);
+				}
+				JDBCUltil.closeConnection(con);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			JDBCUltil.closeConnection(con);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} else {
+			System.out.println("Kết nối thất bại, vui lòng kiểm tra lại JDBCUltil!");
 		}
-
 		return result;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		ArrayList<Tour> t = tourDAO.getIntance().selectAll();
 		for (String s : t.get(0).getImagePaths()) {

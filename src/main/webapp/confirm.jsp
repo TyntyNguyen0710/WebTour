@@ -13,6 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/confirm.css">
 <title>Confirm</title>
@@ -53,8 +54,9 @@
 			<p>
 				<strong>Số trẻ em: </strong>${param.childs}</p>
 
-			<input type="submit" value="Xác nhận"> <input type="button"
-				value="Hủy" onclick="location.href='bookingTour.jsp';">
+			<input type="submit" value="Xác nhận"
+				onclick="location.href='complete.jsp'"> 
+			<input type="button" value="Hủy" onclick="location.href='showTour.jsp?tourId=${tour.id}'">
 		</form>
 	</div>
 </body>

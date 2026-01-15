@@ -15,7 +15,7 @@ public class userDAO implements DAOInterface<User> {
 	}
 
 	@Override
-	public int insert(User user) {
+	public int insert(User user) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -38,7 +38,7 @@ public class userDAO implements DAOInterface<User> {
 	}
 
 	@Override
-	public int update(User user) {
+	public int update(User user) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -61,7 +61,7 @@ public class userDAO implements DAOInterface<User> {
 	}
 
 	@Override
-	public int delete(User user) {
+	public int delete(User user) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -82,7 +82,7 @@ public class userDAO implements DAOInterface<User> {
 		return result;
 	}
 
-	public int deleteByUsername(String username) {
+	public int deleteByUsername(String username) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -104,7 +104,7 @@ public class userDAO implements DAOInterface<User> {
 	}
 
 	@Override
-	public ArrayList<User> selectAll() {
+	public ArrayList<User> selectAll() throws ClassNotFoundException {
 		ArrayList<User> userList = new ArrayList<>();
 		Connection connection = JDBCUltil.getConnection();
 
@@ -131,7 +131,7 @@ public class userDAO implements DAOInterface<User> {
 	}
 
 	@Override
-	public User selectByID(String username) {
+	public User selectByID(String username) throws ClassNotFoundException {
 		User user = null;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -159,7 +159,7 @@ public class userDAO implements DAOInterface<User> {
 	}
 
 
-	public int updatePassword(String username, String password) {
+	public int updatePassword(String username, String password) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 

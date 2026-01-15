@@ -28,10 +28,17 @@ public class ChangePasswordAfterLoginServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// Lấy thông tin người dùng từ session hoặc database
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username"); // Thay thế bằng đối tượng User của bạn
-		User user = userDAO.getIntance().selectByID(username);
+		User user = null;
+		try {
+			user = userDAO.getIntance().selectByID(username);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		if (username != null) {
 			// Lấy mật khẩu hiện tại từ biểu mẫu
 			String currentPassword = request.getParameter("currentPassword");
@@ -44,11 +51,20 @@ public class ChangePasswordAfterLoginServlet extends HttpServlet {
 
 				// Kiểm tra xem mật khẩu mới và xác nhận mật khẩu mới có khớp nhau không
 				if (newPassword.equals(confirmPassword)) {
-					userDAO.getIntance().updatePassword(username, newPassword);
+					try {
+						userDAO.getIntance().updatePassword(username, newPassword);
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
 
 					// Hiển thị thông báo đổi mật khẩu thành công và chuyển hướng người dùng
 					response.sendRedirect("login.jsp");
-					sendConfirmationEmail(username);
+					try {
+						sendConfirmationEmail(username);
+					} catch (ClassNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				} else {
 					// Hiển thị thông báo lỗi khi mật khẩu mới và xác nhận không khớp
 					response.sendRedirect("changePasswordMismatched.jsp");
@@ -63,7 +79,7 @@ public class ChangePasswordAfterLoginServlet extends HttpServlet {
 		}
 	}
 
-	private void sendConfirmationEmail(String username) {
+	private void sendConfirmationEmail(String username) throws ClassNotFoundException {
 		// Cài đặt thông tin của email
 		String to = customerDAO.getIntance().selectEmailByUsername(username); // Thay thế bằng địa chỉ email của người
 																				// dùng
@@ -71,8 +87,8 @@ public class ChangePasswordAfterLoginServlet extends HttpServlet {
 		String body = "Mật khẩu của tài khoản " + username + " đã được thay đổi thành công.";
 
 		// Cài đặt thông tin của tài khoản email gửi
-		final String from = "vanluan0903@gmail.com";
-		final String password = "hgxt eszi yqcs uhzb";
+		final String from = "philong2m@gmail.com";
+		final String password = "nqjk dbbg ilbi faaf";
 
 		// Cài đặt thông tin của máy chủ SMTP
 		Properties properties = new Properties();

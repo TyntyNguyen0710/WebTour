@@ -6,40 +6,29 @@
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/admin.css">
 <title>Admin Panel</title>
-
-<!-- Các phần khác của head -->
 </head>
-
 <body>
-
 	<header>
 		<div>
-			<a href="trangchu.jsp"> <img id="logo" src="img/logo.png"
-				alt="Logo">
-			</a>
+			<a href="trangchu.jsp"><img id="logo" src="img/logo.png"
+				alt="Logo"></a>
 		</div>
+
 		<h1>Admin Panel</h1>
 
-		<!-- Biểu mẫu đăng xuất -->
 		<div id="logout-container">
 			<form action="logout" method="post">
-				<button id="logout-btn" type="submit">
-					<i class="fa fa-sign-out" aria-hidden="true"></i> Đăng xuất
-				</button>
+				<button id="logout-btn" type="submit">Đăng xuất</button>
 			</form>
 		</div>
 	</header>
 
-
-
 	<div id="container">
-
 		<div id="leftMenu">
 			<ul>
 				<li><a href="javascript:void(0);"
@@ -51,12 +40,8 @@
 			</ul>
 		</div>
 
-		<div id="content">
-			<!-- Nội dung sẽ được tải ở đây dựa trên sự lựa chọn của người dùng -->
-		</div>
-
+		<div id="content"></div>
 	</div>
-
 	<script>
 		// Function to handle content loading
 		function showContent(contentPage) {

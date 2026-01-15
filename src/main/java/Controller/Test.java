@@ -6,7 +6,7 @@ import dao.customerDAO;
 //import model.Booking;
 
 public class Test {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 //		ArrayList<Booking> bookings = bookingDAO.getIntance().selectAll();
 //		for (Booking booking : bookings) {
 //			System.out.println(booking);

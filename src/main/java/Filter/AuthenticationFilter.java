@@ -1,4 +1,5 @@
 package Filter;
+
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,32 +15,35 @@ import javax.servlet.http.HttpSession;
 @WebFilter("/information.jsp")
 public class AuthenticationFilter implements Filter {
 
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-            throws IOException, ServletException {
-        HttpServletRequest httpRequest = (HttpServletRequest) request;
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        HttpSession session = httpRequest.getSession(false);
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 
-        // Check if the username attribute is present in the session
-        String username = (session != null) ? (String) session.getAttribute("username") : null;
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		HttpSession session = httpRequest.getSession(false);
 
-        if (username != null) {
-            // User is authenticated, continue with the request
-            chain.doFilter(request, response);
-        } else {
-            // User is not authenticated, redirect to the home page
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/trangchu.jsp");
-        }
-    }
+		// Check if the username attribute is present in the session
+		String username = (session != null) ? (String) session.getAttribute("username") : null;
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        // Initialization code, if needed
-    }
+		if (username != null) {
+			// User is authenticated, continue with the request
+			chain.doFilter(request, response);
+		} else {
+			// User is not authenticated, redirect to the home page
+			httpResponse.sendRedirect(httpRequest.getContextPath() + "/trangchu.jsp");
+		}
+	}
 
-    @Override
-    public void destroy() {
-        // Cleanup code, if needed
-    }
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+		// Initialization code, if needed
+	}
+
+	@Override
+	public void destroy() {
+		// Cleanup code, if needed
+	}
 }

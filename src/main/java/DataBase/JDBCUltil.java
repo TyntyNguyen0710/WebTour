@@ -6,18 +6,23 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class JDBCUltil {
-
-	private static final String URL = "jdbc:sqlserver://localhost:1433;encrypt=false;databaseName=ProjectWeb";
-	private static final String USER = "sa";
-	private static final String PASSWORD = "ps04092003";
-
-	public static Connection getConnection(){
+	public static Connection getConnection() throws ClassNotFoundException {
+		Connection con = null;
 		try {
-			return DriverManager.getConnection(URL, USER, PASSWORD);
+			String URL = "jdbc:sqlserver://localhost:1433;encrypt=false;databaseName=ProjectWeb;encrypt=false;trustServerCertificate=true;characterEncoding=UTF-8";
+			String USER = "sa";
+			String PASSWORD = "123@";
+
+			// Lấy Driver của SQL Server
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+		} catch (ClassNotFoundException e) {
+			System.err.println("Lỗi: Thiếu thư viện JDBC Driver (sqljdbc4.jar hoặc mssql-jdbc.jar)");
 		} catch (SQLException e) {
+			System.err.println("Lỗi kết nối: Có thể chưa bật TCP/IP cổng 1433 hoặc sai Pass sa");
 			e.printStackTrace();
-			return null;
 		}
+		return con;
 	}
 
 	public static void closeConnection(Connection c) {

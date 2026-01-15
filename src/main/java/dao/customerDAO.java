@@ -13,7 +13,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return new customerDAO();
 	}
 
-	public int insert(Customer customer) {
+	public int insert(Customer customer) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -59,7 +59,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		}
 	}
 
-	public int update(Customer customer) {
+	public int update(Customer customer) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -82,7 +82,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public int delete(Customer customer) {
+	public int delete(Customer customer) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -102,7 +102,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public ArrayList<Customer> selectAll() {
+	public ArrayList<Customer> selectAll() throws ClassNotFoundException {
 		ArrayList<Customer> result = new ArrayList<>();
 		Connection con = JDBCUltil.getConnection();
 		String sql = "SELECT * FROM Customer WHERE role <> 'Admin' ";
@@ -128,7 +128,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public int deleteByEmail(String customerEmail) {
+	public int deleteByEmail(String customerEmail) throws ClassNotFoundException {
 		Connection con = JDBCUltil.getConnection();
 		String sql = "DELETE FROM Customer WHERE email=?";
 		int result = 0;
@@ -153,7 +153,7 @@ public class customerDAO implements DAOInterface<Customer> {
 	}
 
 	@Override
-	public Customer selectByID(String customerID) {
+	public Customer selectByID(String customerID) throws ClassNotFoundException {
 		Customer result = null;
 		Connection con = JDBCUltil.getConnection();
 		String sql = "SELECT * FROM Customer WHERE id=?";
@@ -181,7 +181,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public Customer selectByIDCustomer(int customerId) {
+	public Customer selectByIDCustomer(int customerId) throws ClassNotFoundException {
 		Customer result = null;
 		Connection con = JDBCUltil.getConnection();
 		String sql = "SELECT * FROM Customer WHERE id=?";
@@ -209,7 +209,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public Customer selectByUsername(String username) {
+	public Customer selectByUsername(String username) throws ClassNotFoundException {
 		Customer result = null;
 		Connection con = JDBCUltil.getConnection();
 		String sql = "SELECT * FROM Customer WHERE username=?";
@@ -237,7 +237,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public Customer selectByEmail(String emailCus) {
+	public Customer selectByEmail(String emailCus) throws ClassNotFoundException {
 		Customer result = null;
 		Connection con = JDBCUltil.getConnection();
 		String sql = "SELECT * FROM Customer WHERE email=?";
@@ -265,7 +265,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return result;
 	}
 
-	public String getUserRole(String username) {
+	public String getUserRole(String username) throws ClassNotFoundException {
 		try (Connection connection = JDBCUltil.getConnection()) {
 			String sql = "SELECT role FROM Customer WHERE username=?";
 			try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -283,7 +283,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return null; // Return null if role is not found
 	}
 
-	public String selectEmailByUsername(String username) {
+	public String selectEmailByUsername(String username) throws ClassNotFoundException {
 		String email = null;
 		Connection con = JDBCUltil.getConnection();
 		String sql = "SELECT email FROM Customer WHERE username=?";
@@ -306,7 +306,7 @@ public class customerDAO implements DAOInterface<Customer> {
 		return email;
 	}
 
-	public int insertNoLogin(Customer customer) {
+	public int insertNoLogin(Customer customer) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -328,7 +328,7 @@ public class customerDAO implements DAOInterface<Customer> {
 			// Execute the insert
 			result = preparedStatement.executeUpdate();
 
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace(); // Handle the exception based on your application's needs
 		} finally {
 			JDBCUltil.closePreparedStatement(preparedStatement);
@@ -337,7 +337,8 @@ public class customerDAO implements DAOInterface<Customer> {
 
 		return result;
 	}
-	public int update(String name, String phone, String address,String username) {
+
+	public int update(String name, String phone, String address, String username) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = JDBCUltil.getConnection();
 
@@ -348,7 +349,7 @@ public class customerDAO implements DAOInterface<Customer> {
 			preparedStatement.setString(2, phone);
 			preparedStatement.setString(3, address);
 			preparedStatement.setString(4, username);
-			
+
 			// Execute the update
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {

@@ -32,6 +32,8 @@ public class SaveBookingServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// Retrieve tourId from session
 		HttpSession session = request.getSession();
 		int tourId = (int) session.getAttribute("tourID");
@@ -76,8 +78,7 @@ public class SaveBookingServlet extends HttpServlet {
 	}
 
 	private Booking saveBookingToDatabaseAfterLogin(int tourId, String fullName, String address, String email,
-			String phone, String departureDate, String adults, String childs, String username) {
-		// TODO Auto-generated method stub
+			String phone, String departureDate, String adults, String childs, String username) throws ClassNotFoundException {
 		int customerID = customerDAO.getIntance().selectByUsername(username).getID();
 		bookingDAO tour = bookingDAO.getIntance(); // Assume you have a BookingDAO class
 		Customer customer = new Customer(fullName, address, email, phone);
@@ -88,7 +89,7 @@ public class SaveBookingServlet extends HttpServlet {
 	}
 
 	private Booking saveBookingToDatabase(int tourId, String fullName, String address, String email, String phone,
-			String departureDate, String adults, String childs) throws SQLException {
+			String departureDate, String adults, String childs) throws SQLException, ClassNotFoundException {
 		// Implement your logic to save the booking details to the database here
 		// You can use JDBC or an ORM framework like Hibernate for database operations
 		// For simplicity, let's assume you have a BookingDAO class with a method like
@@ -106,8 +107,8 @@ public class SaveBookingServlet extends HttpServlet {
 
 	private void sendBookingConfirmationEmail(Booking booking) {
 		// Replace with your email and password
-		final String username = "vanluan0903@gmail.com";
-		final String password = "hgxt eszi yqcs uhzb";
+		final String username = "philong2m@gmail.com";
+		final String password = "nqjk dbbg ilbi faaf";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");

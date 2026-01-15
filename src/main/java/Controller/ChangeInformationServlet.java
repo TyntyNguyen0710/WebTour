@@ -16,13 +16,19 @@ public class ChangeInformationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// Xử lý yêu cầu POST
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String address = request.getParameter("address");
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		customerDAO.getIntance().update(name, phone, address, username);
+		try {
+			customerDAO.getIntance().update(name, phone, address, username);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		response.sendRedirect("information.jsp");
 	}
 

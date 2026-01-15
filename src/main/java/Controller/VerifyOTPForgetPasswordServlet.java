@@ -13,26 +13,29 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet("/VerifyOTPForgetPasswordServlet")
 public class VerifyOTPForgetPasswordServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Lấy giá trị OTP nhập từ trang verifyOTP.jsp
-        String enteredOTP = request.getParameter("otpForgetPassword");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		// Lấy giá trị OTP nhập từ trang verifyOTP.jsp
+		String enteredOTP = request.getParameter("otpForgetPassword");
 
-        // Lấy giá trị OTP từ session
-        HttpSession session = request.getSession();
-        String storedOTP = (String) session.getAttribute("otpPassword");
+		// Lấy giá trị OTP từ session
+		HttpSession session = request.getSession();
+		String storedOTP = (String) session.getAttribute("otpPassword");
 
-        // Kiểm tra xem OTP nhập vào có khớp với OTP từ session hay không
-        if (enteredOTP != null && storedOTP != null && enteredOTP.equals(storedOTP)) {
-            // Xác nhận thành công
+		// Kiểm tra xem OTP nhập vào có khớp với OTP từ session hay không
+		if (enteredOTP != null && storedOTP != null && enteredOTP.equals(storedOTP)) {
+			// Xác nhận thành công
 
-            // Chuyển hướng đến trang checkingTourNoLoginFinal
-            response.sendRedirect("changePassword.jsp");
-        } else {
-            // Xác nhận thất bại
-            response.sendRedirect("verifyOTPForgetPasswordRegain.jsp");;
-        }
-    }
+			// Chuyển hướng đến trang checkingTourNoLoginFinal
+			response.sendRedirect("changePassword.jsp");
+		} else {
+			// Xác nhận thất bại
+			response.sendRedirect("verifyOTPForgetPasswordRegain.jsp");
+			;
+		}
+	}
 }
