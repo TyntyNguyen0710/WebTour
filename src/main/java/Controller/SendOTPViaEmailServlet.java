@@ -24,6 +24,9 @@ public class SendOTPViaEmailServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
 		// Lấy giá trị tourID từ yêu cầu
 		String email = request.getParameter("email");
 
@@ -49,8 +52,8 @@ public class SendOTPViaEmailServlet extends HttpServlet {
 	}
 
 	private void sendOTPEmail(String toEmail, String otp) {
-		final String username = "vanluan0903@gmail.com";
-		final String password = "hgxt eszi yqcs uhzb";
+		final String username = "philong2m@gmail.com";
+		final String password = "nqjk dbbg ilbi faaf";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -73,7 +76,7 @@ public class SendOTPViaEmailServlet extends HttpServlet {
 
 			Transport.send(message);
 
-			System.out.println("OTP Email sent successfully!");
+			System.out.println("Mã OTP gửi về mail thành công!");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

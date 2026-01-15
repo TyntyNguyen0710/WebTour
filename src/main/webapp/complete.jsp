@@ -12,7 +12,7 @@
 <script>
 	setTimeout(function() {
 		window.location.href = 'trangchu.jsp';
-	}, 5000); // 5000 milliseconds = 5 seconds
+	}, 2000);
 </script>
 </head>
 <body>

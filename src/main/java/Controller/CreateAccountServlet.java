@@ -32,6 +32,8 @@ public class CreateAccountServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// Lấy thông tin từ form
 		String fullName = request.getParameter("fullName");
 		String address = request.getParameter("address");
@@ -42,34 +44,52 @@ public class CreateAccountServlet extends HttpServlet {
 
 		// Xử lý thông tin đăng ký ở đây (ví dụ: lưu vào cơ sở dữ liệu)
 
-		if (!isValidUser(username, password)) {
-            // Đăng nhập thành công
-			userDAO ud = userDAO.getIntance();
-			customerDAO cd = customerDAO.getIntance();
-			ud.insert(new User(username, password));
-			cd.insert(new Customer(fullName, address, email, phone, new User(username, password)));
-			
+		try {
+			if (!isValidUser(username, password)) {
+			    // Đăng nhập thành công
+				userDAO ud = userDAO.getIntance();
+				customerDAO cd = customerDAO.getIntance();
+				try {
+					ud.insert(new User(username, password));
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					cd.insert(new Customer(fullName, address, email, phone, new User(username, password)));
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 //			 Gửi email
-			sendRegistrationEmail(fullName, email);
+				sendRegistrationEmail(fullName, email);
 
 //			 Hiển thị thông báo đăng ký thành công
-			response.setContentType("text/html");
-			PrintWriter out = response.getWriter();
-			out.println("<html><body>");
-			out.println("<h2>Registration Successful</h2>");
-			out.println("<p>Thank you for registering. Your account has been created successfully.</p>");
-			out.println("</body></html>");
-			response.sendRedirect("login.jsp");
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				out.println("<html><body>");
+				out.println("<h2>Registration Successful</h2>");
+				out.println("<p>Thank you for registering. Your account has been created successfully.</p>");
+				out.println("</body></html>");
+				response.sendRedirect("login.jsp");
 
-        } else {
-            // Đăng ký thất bại
-            response.sendRedirect("error.jsp");
-        }
+			} else {
+			    // Đăng ký thất bại
+			    response.sendRedirect("error.jsp");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	private void sendRegistrationEmail(String fullName, String email) {
 		// Thông tin tài khoản email gửi
-		final String from = "vanluan0903@gmail.com";
-		final String password = "hgxt eszi yqcs uhzb";
+		final String from = "philong2m@gmail.com";
+		final String password = "nqjk dbbg ilbi faaf";
 
 		// Thông tin máy chủ SMTP
 		String host = "smtp.gmail.com";
@@ -110,7 +130,7 @@ public class CreateAccountServlet extends HttpServlet {
 		}
 	}
 
-	  private boolean isValidUser(String username, String password) {
+	  private boolean isValidUser(String username, String password) throws ClassNotFoundException {
 	        Connection connection = null;
 	        try {
 	            // Use a connection pool library like Apache DBCP or HikariCP

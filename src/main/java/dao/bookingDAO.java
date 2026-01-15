@@ -17,7 +17,7 @@ public class bookingDAO implements DAOInterface<Booking> {
 	}
 
 	@Override
-	public int insert(Booking booking) {
+	public int insert(Booking booking) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -52,7 +52,7 @@ public class bookingDAO implements DAOInterface<Booking> {
 		return result;
 	}
 
-	public int insertNoLogin(Booking booking) {
+	public int insertNoLogin(Booking booking) throws ClassNotFoundException {
 		int result = 0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -72,7 +72,7 @@ public class bookingDAO implements DAOInterface<Booking> {
 			preparedStatement.setInt(2, booking.getNoAdults());
 			preparedStatement.setInt(3, booking.getNoChildren());
 			preparedStatement.setString(4, booking.getEmail());
-			
+
 			preparedStatement.setInt(5, booking.getTourID());
 
 			// Execute the insertion query
@@ -117,6 +117,9 @@ public class bookingDAO implements DAOInterface<Booking> {
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace(); // Handle the exception based on your application's needs
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} finally {
 			// Close resources in the reverse order of their creation
 			JDBCUltil.closePreparedStatement(preparedStatement);
@@ -149,6 +152,8 @@ public class bookingDAO implements DAOInterface<Booking> {
 			result = preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace(); // Handle the exception based on your application's needs
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			// Close resources in the reverse order of their creation
 			JDBCUltil.closePreparedStatement(preparedStatement);
@@ -199,6 +204,8 @@ public class bookingDAO implements DAOInterface<Booking> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace(); // Handle the exception based on your application's needs
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			// Close resources in the reverse order of their creation
 
@@ -210,7 +217,7 @@ public class bookingDAO implements DAOInterface<Booking> {
 	}
 
 	@Override
-	public Booking selectByID(String email) {
+	public Booking selectByID(String email) throws ClassNotFoundException {
 		Booking booking = null;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -218,7 +225,11 @@ public class bookingDAO implements DAOInterface<Booking> {
 
 		try {
 			// Assuming you have a Connection object named 'connection'
-			connection = JDBCUltil.getConnection();
+			try {
+				connection = JDBCUltil.getConnection();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 			// Define the SQL query for selecting a Booking by ID
 			String sql = "SELECT * FROM Booking WHERE email = ?";
@@ -257,7 +268,7 @@ public class bookingDAO implements DAOInterface<Booking> {
 		return booking;
 	}
 
-	public List<Booking> selectBookingsByEmail(String emailCus) {
+	public List<Booking> selectBookingsByEmail(String emailCus) throws ClassNotFoundException {
 		List<Booking> bookings = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -294,6 +305,8 @@ public class bookingDAO implements DAOInterface<Booking> {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace(); // Handle the exception based on your application's needs
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		} finally {
 			// Close resources in the reverse order of their creation
 			JDBCUltil.closePreparedStatement(preparedStatement);
@@ -302,27 +315,33 @@ public class bookingDAO implements DAOInterface<Booking> {
 
 		return bookings;
 	}
+
 	public int deleteByID(long id) {
-	    Connection con = JDBCUltil.getConnection();
-	    String sql = "DELETE FROM Booking WHERE id=?";
-	    int result = 0;
+		Connection con = null;
+		try {
+			con = JDBCUltil.getConnection();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		String sql = "DELETE FROM Booking WHERE id=?";
+		int result = 0;
 
-	    try {
-	        PreparedStatement pst = con.prepareStatement(sql);
-	        pst.setLong(1, id);
+		try {
+			PreparedStatement pst = con.prepareStatement(sql);
+			pst.setLong(1, id);
 
-	        // Execute the delete statement
-	        result = pst.executeUpdate();
+			// Execute the delete statement
+			result = pst.executeUpdate();
 
-	        // Close the PreparedStatement and Connection
-	        pst.close();
-	        JDBCUltil.closeConnection(con);
-	    } catch (SQLException e) {
-	        // Handle any SQL errors
-	        e.printStackTrace();
-	    }
+			// Close the PreparedStatement and Connection
+			pst.close();
+			JDBCUltil.closeConnection(con);
+		} catch (SQLException e) {
+			// Handle any SQL errors
+			e.printStackTrace();
+		}
 
-	    return result;
+		return result;
 	}
 
 }

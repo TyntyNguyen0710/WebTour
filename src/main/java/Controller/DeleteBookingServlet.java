@@ -24,6 +24,8 @@ public class DeleteBookingServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		// Retrieve the booking ID and email from the form
 		String bookingIdString = request.getParameter("bookingId");
 		String bookingEmail = request.getParameter("email");
@@ -54,8 +56,8 @@ public class DeleteBookingServlet extends HttpServlet {
 	}
 
 	private void sendConfirmationEmail(String email, String bookingID) {
-		String from = "vanluan0903@gmail.com";
-		String password = "hgxt eszi yqcs uhzb";
+		String from = "philong2m@gmail.com";
+		String password = "123@";
 
 		// Set the recipient email address
 		String to = email;

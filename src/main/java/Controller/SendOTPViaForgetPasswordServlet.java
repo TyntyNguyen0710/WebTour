@@ -26,10 +26,19 @@ public class SendOTPViaForgetPasswordServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
 		// Lấy giá trị tourID từ yêu cầu
 		
 		String username = request.getParameter("username");
-		String email = customerDAO.getIntance().selectEmailByUsername(username);
+		String email = null;
+		try {
+			email = customerDAO.getIntance().selectEmailByUsername(username);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(email != null && !email.isEmpty()) { 
 		// Sinh mã OTP
 		String otp = generateOTP();
@@ -56,8 +65,8 @@ public class SendOTPViaForgetPasswordServlet extends HttpServlet {
 	}
 
 	private void sendOTPEmail(String toEmail, String otp) {
-		final String username = "vanluan0903@gmail.com";
-		final String password = "hgxt eszi yqcs uhzb";
+		final String username = "philong2m@gmail.com";
+		final String password = "nqjk dbbg ilbi faaf";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -80,7 +89,7 @@ public class SendOTPViaForgetPasswordServlet extends HttpServlet {
 
 			Transport.send(message);
 
-			System.out.println("OTP Email sent successfully!");
+			System.out.println("Mã OTP gửi về mail thành công!");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

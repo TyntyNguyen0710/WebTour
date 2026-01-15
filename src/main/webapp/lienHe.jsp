@@ -122,7 +122,7 @@
 			<p class="ten">Công ty Du Lịch LongPhuc</p>
 			<p class="dia_chi">Văn phòng tại Hồ Chí Minh</p>
 			<p class="dia_chi_cu_the">
-				<i class="fa fa-map-marker" aria-hidden="true"></i> 1234 QL1K, TP Thủ Đức, HCM
+				<i class="fa fa-map-marker" aria-hidden="true"></i> 1234, QL1K, TP Thủ Đức, HCM
 			</p>
 			<p class="phone">
 				<i class="fa fa-phone" aria-hidden="true"></i>+84-123-456-789
@@ -132,11 +132,10 @@
 				aria-hidden="true"></i> facebook.com/longphuctravel</a>
 			<hr>
 			<div class="phan2">
-				<p>Văn Phòng Tại Việt Trì</p>
-				<p>Quản lí: Nguyễn Văn A</p>
+				<p>Văn Phòng Tại TPHCM</p>
+				<p>Quản lí: Nguyễn Phi Long</p>
 				<p>
-					<i class="fa fa-map-marker" aria-hidden="true"></i> Phan Rang,Ninh
-					Thuận, Việt Nam
+					<i class="fa fa-map-marker" aria-hidden="true"></i> 1234, QL1K, Thủ Đức, TP.HCM
 				</p>
 				<p>
 					<i class="fa fa-phone" aria-hidden="true"></i> +84-456-123-789
@@ -159,7 +158,7 @@
 			<li class="list1">
 				<p class="p1">THÔNG TIN LIÊN HỆ</p>
 				<p class="p2">Công ty du lịch LongPhuc</p> <span class="sp1">
-					<i class="fa-solid fa-location-dot"></i> 1234 QL1K<br>Thành
+					<i class="fa-solid fa-location-dot"></i> 1234, QL1K<br>Thành
 					Phố Thủ Đức, HCM
 			</span><br>
 				<p class="p3">0123 456 789</p> <a class="a1"

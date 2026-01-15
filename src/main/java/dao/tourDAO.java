@@ -14,7 +14,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return new tourDAO();
 	}
 
-	public int insert(Tour t) {
+	public int insert(Tour t) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Connection con = JDBCUltil.getConnection();
@@ -39,7 +39,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return result;
 	}
 
-	public int update(Tour t) {
+	public int update(Tour t) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Connection con = JDBCUltil.getConnection();
@@ -65,7 +65,7 @@ public class tourDAO implements DAOInterface<Tour> {
 
 	}
 
-	public int delete(Tour t) {
+	public int delete(Tour t) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		int result = 0;
 		Connection con = JDBCUltil.getConnection();
@@ -84,7 +84,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return result;
 	}
 
-	public Tour selectByID(String tourId) {
+	public Tour selectByID(String tourId) throws ClassNotFoundException {
 		// TODO Auto-generated method stub
 		Tour result = null;
 		Connection con = JDBCUltil.getConnection();
@@ -115,7 +115,7 @@ public class tourDAO implements DAOInterface<Tour> {
 
 	}
 
-	public ArrayList<Tour> selectAll() throws SQLException {
+	public ArrayList<Tour> selectAll() throws SQLException, ClassNotFoundException {
 		ArrayList<Tour> result = new ArrayList<Tour>();
 		Connection con = JDBCUltil.getConnection();
 
@@ -157,7 +157,7 @@ public class tourDAO implements DAOInterface<Tour> {
 		return result;
 	}
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
 		ArrayList<Tour> t = tourDAO.getIntance().selectAll();
 		for (String s : t.get(0).getImagePaths()) {

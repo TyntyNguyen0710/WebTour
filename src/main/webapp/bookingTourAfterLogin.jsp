@@ -52,7 +52,7 @@ if (!"Customer".equals(userRole)) {
 				id="adults" name="adults" min="0" value="0"><br> <label
 				for="childs">Số lượng trẻ em:</label> <input type="number"
 				id="childs" name="childs" min="0" value="0"><br> <input
-				type="submit" value="Gởi"> <input type="button" value="Hủy"
+				type="submit" value="Gửi"> <input type="button" value="Hủy"
 				onclick="goBack()">
 		</form>
 	</div>

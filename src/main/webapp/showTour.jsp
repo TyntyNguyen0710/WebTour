@@ -52,7 +52,6 @@
 			</ul>
 		</nav>
 	</div>
-	</div>
 
 	<div class="noi_dung">
 		<ul>
@@ -62,7 +61,7 @@
 						<div class="container">
 							<div class="main">
 								<img class="img-main" src="img/${tour.imagePaths[0]}">
-								<div class="control prev"><</div>
+								<div class="control prev"></div>
 								<div class="control next">></div>
 							</div>
 							<div class="list-img">
@@ -102,7 +101,7 @@
 								<td>${tour.schedule}</td>
 							</tr>
 							<tr>
-								<td>Vận chuyển</td>
+								<td>Phương tiện</td>
 								<td>${tour.transport}</td>
 							</tr>
 						</table>
@@ -117,34 +116,22 @@
 							<div class="button">
 								<form id="bookingForm" action="optionBookingTour" method="get">
 									<c:set var="tourID" value="${tour.id}" scope="session" />
-									<input type="submit" value="ĐẶT TOUR NGAY">
+									<input type="submit" value="ĐẶT TOUR NGAY"
+										onclick="return checkLogin('${sessionScope.username}', '${tour.id}')">
 								</form>
 							</div>
 
 						</div>
 						<p class="lh">Liên hệ càng sớm-Giá càng rẻ cả nhà ơi!</p>
 						<p class="hotline">
-							<span>0234.103.099 hoặc 0999.799.399 </span>
+							<span>0123.456.789 </span>
 						</p>
 
 					</li>
 				</c:if>
 			</c:forEach>
 		</ul>
-		<div class="mo_ta">
-
-			<p class="noi_dungMT">
-				<span class="title"> Mô Tả:</span> Đi tour du lịch Nha Trang 4N3Đ,
-				bạn có dịp đến với biển Nha Trang tuyệt đẹp, khu du lịch Hòn Ngọc
-				Việt 5* ấn tượng, hòn Mun Hòn Tằm với rạn san hô lộng lẫy dưới đáy
-				đại dương, ngắm vịnh Ninh Vân, vịnh Vân Phong hoang sơ, thuần khiết.
-				Thêm vào đó, Viện Hải dương học Nha Trang, tháp Bà Ponagar cũng được
-				thiết kế vào chương trình tour. Ngay dưới đây là lịch trình chi
-				tiết, bạn có thể tham khảo:
-			</p>
-		</div>
 	</div>
-
 	<div class="tour">
 		<h4>TẤT CẢ CÁC TOUR</h4>
 		<div class="container_tour">
@@ -186,7 +173,7 @@
 						</td>
 
 						<c:if test="${(loopStatus.index + 1) % 3 == 0 or loopStatus.last}">
-							</tr>
+
 						</c:if>
 					</c:if>
 				</c:forEach>
@@ -198,7 +185,7 @@
 			<li class="list1">
 				<p class="p1">THÔNG TIN LIÊN HỆ</p>
 				<p class="p2">Công ty du lịch LongPhuc</p> <span class="sp1">
-					<i class="fa-solid fa-location-dot"></i> 1234 QL1K <br>Thành
+					<i class="fa-solid fa-location-dot"></i> 1234, QL1K, <br>Thành
 					Phố Thủ Đức, HCM.
 			</span><br>
 				<p class="p3">0399 790 053</p> <a class="a1"
@@ -210,16 +197,14 @@
 			<li class="list2">
 				<p class="p4">HỖ TRỢ TƯ VẤN</p>
 				<p class="p5">HOTLINE 0123 456 789</p> <a
-				href="https://www.facebook.com" class="fb_icon">
-					<i class="fa-brands fa-facebook" style="color: #1262ed;"></i>
-			</a> <a href="https://www.instagram.com" class="ins_icon">
-					<i class="fa-brands fa-instagram" style="color: #ec2222;"></i>
-			</a> <a href="https://mail.google.com/mail"
-				class="mail_icon"> <i class="fa-regular fa-envelope"
-					style="color: #db611f;"></i>
-			</a> <a href="https://www.tiktok.com"
-				class="tiktok_icon"> <i class="fa-brands fa-tiktok"
-					style="color: #e3e7ed;"></i>
+				href="https://www.facebook.com" class="fb_icon"> <i
+					class="fa-brands fa-facebook" style="color: #1262ed;"></i>
+			</a> <a href="https://www.instagram.com" class="ins_icon"> <i
+					class="fa-brands fa-instagram" style="color: #ec2222;"></i>
+			</a> <a href="https://mail.google.com/mail" class="mail_icon"> <i
+					class="fa-regular fa-envelope" style="color: #db611f;"></i>
+			</a> <a href="https://www.tiktok.com" class="tiktok_icon"> <i
+					class="fa-brands fa-tiktok" style="color: #e3e7ed;"></i>
 			</a>
 			</li>
 			<li class="list3">
@@ -250,7 +235,7 @@
 
 						// Check if the username is not empty
 						var username = "${username}";
-						if (username.trim() !== "") {
+						if (username.trim() == "") {
 							// Redirect to the bookingTourAfterLogin page
 							window.location.href = "bookingTourAfterLogin.jsp?tourId=${tour.id}";
 						} else {
@@ -258,5 +243,14 @@
 							this.submit();
 						}
 					});
+	function checkLogin(username, tourId) {
+		if (!username || username.trim() === "") {
+			alert("Vui lòng đăng nhập để đặt tour!");
+			// Chuyển hướng thẳng đến trang đăng nhập
+			window.location.href = "login.jsp?redirectTourId=" + tourId;
+			return false; // Ngăn form submit
+		}
+		return true; // Cho phép submit bình thường
+	}
 </script>
 </html>
