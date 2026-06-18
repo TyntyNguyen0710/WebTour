@@ -23,8 +23,10 @@ import javax.servlet.http.HttpSession;
 
 import dao.bookingDAO;
 import dao.customerDAO;
+import dao.tourDAO;           // <-- THÊM MỚI
 import model.Booking;
 import model.Customer;
+import model.Tour;            // <-- THÊM MỚI
 
 @WebServlet("/SaveBooking")
 public class SaveBookingServlet extends HttpServlet {
@@ -34,12 +36,11 @@ public class SaveBookingServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		// Retrieve tourId from session
+
 		HttpSession session = request.getSession();
 		int tourId = (int) session.getAttribute("tourID");
 		String username = (String) session.getAttribute("username");
-		// Retrieve other form parameters
-		System.out.println(username);
+
 		String fullName = request.getParameter("fullName");
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
@@ -47,40 +48,53 @@ public class SaveBookingServlet extends HttpServlet {
 		String departureDate = request.getParameter("departureDate");
 		String adults = request.getParameter("adults");
 		String childs = request.getParameter("childs");
-		// Perform any validation or processing as needed
 
 		try {
-			// Save booking details to the database
+			Booking booking = null;
+
 			if (username != null && !username.equals("")) {
-				Booking booking = saveBookingToDatabaseAfterLogin(tourId, fullName, address, email, phone,
+				booking = saveBookingToDatabaseAfterLogin(tourId, fullName, address, email, phone,
 						departureDate, adults, childs, username);
-				// Send email
-				sendBookingConfirmationEmail(booking);
-
-				// Forward to a success page
-				RequestDispatcher dispatcher = request.getRequestDispatcher("complete.jsp");
-				dispatcher.forward(request, response);
-
 			} else {
-				Booking booking = saveBookingToDatabase(tourId, fullName, address, email, phone, departureDate, adults,
-						childs);
-				// Send email
-				sendBookingConfirmationEmail(booking);
-
-				// Forward to a success page
-				RequestDispatcher dispatcher = request.getRequestDispatcher("complete.jsp");
-				dispatcher.forward(request, response);
+				booking = saveBookingToDatabase(tourId, fullName, address, email, phone, departureDate, adults, childs);
 			}
+
+			// Gửi email xác nhận (giữ nguyên)
+			sendBookingConfirmationEmail(booking);
+
+			// ==================== PHẦN ĐÃ SỬA ====================
+			// Set booking vào request để invoice.jsp sử dụng
+			request.setAttribute("booking", booking);
+
+			// Lấy thông tin Tour
+			Tour tour = tourDAO.getIntance().selectByID(String.valueOf(tourId));
+			request.setAttribute("tour", tour);
+
+			// Lấy thông tin Customer
+			Customer customer = null;
+			if (username != null && !username.isEmpty()) {
+				customer = customerDAO.getIntance().selectByUsername(username);
+			} else {
+				customer = new Customer(fullName, address, email, phone);
+			}
+			request.setAttribute("customer", customer);
+
+			// Forward sang trang hóa đơn + chữ ký số
+			RequestDispatcher dispatcher = request.getRequestDispatcher("invoice.jsp");
+			dispatcher.forward(request, response);
+			// =====================================================
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			// Handle the exception and redirect to an error page
+			// Có thể forward sang trang lỗi nếu cần
 		}
 	}
 
+	// Các phương thức cũ giữ nguyên
 	private Booking saveBookingToDatabaseAfterLogin(int tourId, String fullName, String address, String email,
 			String phone, String departureDate, String adults, String childs, String username) throws ClassNotFoundException {
 		int customerID = customerDAO.getIntance().selectByUsername(username).getID();
-		bookingDAO tour = bookingDAO.getIntance(); // Assume you have a BookingDAO class
+		bookingDAO tour = bookingDAO.getIntance();
 		Customer customer = new Customer(fullName, address, email, phone);
 		Booking booking = new Booking(customer, Date.valueOf(departureDate), Integer.valueOf(adults),
 				Integer.valueOf(childs), customer.getEmail(), tourId, customerID);
@@ -90,23 +104,17 @@ public class SaveBookingServlet extends HttpServlet {
 
 	private Booking saveBookingToDatabase(int tourId, String fullName, String address, String email, String phone,
 			String departureDate, String adults, String childs) throws SQLException, ClassNotFoundException {
-		// Implement your logic to save the booking details to the database here
-		// You can use JDBC or an ORM framework like Hibernate for database operations
-		// For simplicity, let's assume you have a BookingDAO class with a method like
-		// saveBooking
-
-		bookingDAO tour = bookingDAO.getIntance(); // Assume you have a BookingDAO class
+		bookingDAO tour = bookingDAO.getIntance();
 		Customer customer = new Customer(fullName, address, email, phone);
 		Booking booking = new Booking(customer, Date.valueOf(departureDate), Integer.valueOf(adults),
 				Integer.valueOf(childs), customer.getEmail(), tourId);
 		customerDAO.getIntance().insertNoLogin(customer);
 		tour.insertNoLogin(booking);
-
 		return booking;
 	}
 
 	private void sendBookingConfirmationEmail(Booking booking) {
-		// Replace with your email and password
+		// Giữ nguyên code gửi email cũ của bạn
 		final String username = "philong2m@gmail.com";
 		final String password = "nqjk dbbg ilbi faaf";
 
@@ -135,7 +143,6 @@ public class SaveBookingServlet extends HttpServlet {
 					+ "Chúng tôi rất vui vì được phục vụ bạn. Chúc bạn có một chuyện đi tuyệt vời!");
 
 			Transport.send(message);
-
 			System.out.println("Email sent successfully!");
 
 		} catch (MessagingException e) {
